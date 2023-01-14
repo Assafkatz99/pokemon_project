@@ -279,8 +279,8 @@ justify-content:space-between ;
     }
         
     #left_side_pokemon_description img{
-        width: 160px;
-        height: 160px;
+        width: 100px;
+        height: 100px;
     }
 
     #left_side_pokemon_description p:first-child{
@@ -289,23 +289,30 @@ justify-content:space-between ;
     }
 
     #type_lables button{
-       margin-top: 20px;
+       
+       scale: 0.8;
+       margin: 2px;
+       margin-top: 10px;
     }
 
     #right_side_pokemon_description{
         margin-bottom: 5px;
         width: 80%;
-        height: 55%;
+        height: 60%;
         border: none;
         border-top: 1px solid #D7D7D7;
 
         display: flex;
         flex-direction: column;
-        justify-content:space-evenly ;
+        justify-content:space-between ;
         align-items: center;
         text-align: center;
+        padding: 10px;
+        scale: 0.9;
+
         }
 
+   
 
 
     #stats_table{
