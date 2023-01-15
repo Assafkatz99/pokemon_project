@@ -11,6 +11,8 @@ let loadMoreButton = document.getElementById("loadMore");
 loadMoreButton.addEventListener('click', generateAnother12Pokemon)
 
 let liked_pokemons_list = []
+localStorage.setItem("Liked_pokemons", JSON.stringify(liked_pokemons_list))
+
 
 gray_screen_div.addEventListener("click", function(event) {
     if (!event.target.closest("#pokemon_descreption")) {
@@ -154,12 +156,13 @@ function pokemonDescrption(pokemon){
     let heart_button = document.getElementById("like_button")
 
     liked_pokemons_list = JSON.parse(localStorage.getItem("Liked_pokemons"))
-    for (let i of liked_pokemons_list){
-        if (i === data.indexOf(pokemon)){
-            heart_button.setAttribute("src",heart_liked_src)
+    if(liked_pokemons_list !== []){
+        for (let i of liked_pokemons_list){
+            if (i === data.indexOf(pokemon)){
+                heart_button.setAttribute("src",heart_liked_src)
+            }
         }
     }
-
     // ########## HEART BUTTON FUNCTIONALITY  ##########
   
     heart_button.addEventListener("click", () => {
