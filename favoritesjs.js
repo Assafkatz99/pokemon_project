@@ -7,10 +7,8 @@ let pokemon_descreption_div = document.getElementById("pokemon_descreption")
 let heart_unliked_src = "./images/heart-unliked.png"
 let heart_liked_src = "./images/heart-liked.png"
 
-let loadMoreButton = document.getElementById("loadMore");
-loadMoreButton.addEventListener('click', generateAnother12Pokemon)
-
 let liked_pokemons_list = []
+
 
 gray_screen_div.addEventListener("click", function(event) {
     if (!event.target.closest("#pokemon_descreption")) {
@@ -56,8 +54,11 @@ else{
 }
 }
 
-function generateAnother12Pokemon(){
-for (let i = amountOfPokemonOnScreen ; i<(amountOfPokemonOnScreen+12) ; i++){
+function generateLikedPokemons(){
+liked_pokemons_list = JSON.parse(localStorage.getItem("Liked_pokemons"))
+pokemon_menu_div.replaceChildren()
+
+for (let i of liked_pokemons_list){
     let pokemon_card = document.createElement(`div`);
     pokemon_card.innerHTML =  `<p>${formatId(data[i]["id"])}</p><img src='${data[i]["image"]["thumbnail"]}'/><p>${data[i]["name"]["english"]}</p>`
     pokemon_card.addEventListener(`click`,() => {
@@ -66,7 +67,6 @@ for (let i = amountOfPokemonOnScreen ; i<(amountOfPokemonOnScreen+12) ; i++){
     })
     pokemon_menu_div.appendChild(pokemon_card);
 }
-amountOfPokemonOnScreen += 12;
 }
 
 
@@ -169,16 +169,18 @@ function pokemonDescrption(pokemon){
             heart_button.setAttribute("src",heart_liked_src)
             liked_pokemons_list.push(data.indexOf(pokemon))
             localStorage.setItem("Liked_pokemons", JSON.stringify(liked_pokemons_list))
+            generateLikedPokemons()
         }
         else{
             heart_button.setAttribute("src",heart_unliked_src)
             liked_pokemons_list.splice(liked_pokemons_list.indexOf(data.indexOf(pokemon)),1)
             localStorage.setItem("Liked_pokemons", JSON.stringify(liked_pokemons_list))
+            generateLikedPokemons()
+            gray_screen_div.style.display = "none"
+            document.getElementById("pokemon_descreption").innerHTML = ""
         }
     })
     
 }
 
-generateAnother12Pokemon()
-
-
+generateLikedPokemons()
